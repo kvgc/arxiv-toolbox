@@ -9,3 +9,5 @@ To use extension, open any arxiv page, you should see two buttons (Open pdf, Sea
 
 <img src="arxivtools_demo.png" width=100%>
 
+### Demo
+<img src="arxivtoolbox.gif" width=100%>
