@@ -7,7 +7,7 @@ In order to install this extension on firefox:
 - Open the xpi file with firefox 
 - Follow instructions to install
 
-To use extension, open any arxiv page, you should see two buttons (Open pdf, Search astrobites) on the bottom left and a note editor on the bottom right. See screenshot below: 
+To use extension, open any arxiv page, you should see two buttons (Open pdf, Search astrobites) on the bottom left and a note editor on the bottom right. See demo below: 
 
 
 ### Demo
