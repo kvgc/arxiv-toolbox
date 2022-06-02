@@ -23,8 +23,8 @@
 
 	    "js": ["ext_libs/jquery.min.js",
 			"ext_libs/jquery-ui.min.js",
-			"ext_libs/bootstrap.min.js",
 			"ext_libs/trumbowyg.min.js",
+			"ext_libs/notify.min.js",
 			"src/background.js"
 		]
 	}

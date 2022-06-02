@@ -27,21 +27,30 @@ var adsLink = document.getElementsByClassName("abs-button abs-button-small cite-
 var pdfIframe2 = `<iframe src="`+adsLink+`" width = 1500 height = 1200></iframe>`;
 
 
+/////// variables used /////////
+var webPageUrl = window.location.href.replace(/(^\w+:|^)\/\//, '');
+var url_window = window.location.href;
+var pageTitle = document.title;
+
+
 source.innerHTML +=`
 <div>
 <button class="btn btn-lg btn-primary" id='arxiv-pdf'>Load pdf</button>
 <button class="btn btn-lg btn-primary" id='AstroBites'>Search Astrobites</button>
+<button class="btn btn-lg btn-primary" id='notesToggle'>Toggle notes</button>
+<button class="btn btn-lg btn-info" id="saveNotes">Save notes</button>
 </div><div id="renderDisplay"></div></div>
 ` + `
  <div class="trumbowyg-dark">
- <div  style="left: 60%; height: 50%; position: fixed; width: 40%; bottom: 1%;z-index:10;background-color:white">
- <textarea id="trumbowygNote"></textarea>
+ <div  style="left: 58%; height: 40%; position: fixed; width: 40%; bottom: 1%;z-index:10;background-color:white">
+ <div id="trumbowygNote"></div>
  </div>
  </div>`;
 
 
+ // <button class="btn btn-lg btn-outline-secondary" id="viewAllNotes">View all notes</button>
 
-
+//////// initialize note ///////////
 $('#trumbowygNote' ).trumbowyg({
       btns: [
         ['viewHTML'],
@@ -57,9 +66,21 @@ $('#trumbowygNote' ).trumbowyg({
       ],
       imageWidthModalEdit: true,
       resetCss: true,
-          autogrow: false
+      autogrow: false
 
                     });
+
+/////////////////////////////////////
+
+
+// load from local storage if it exists
+var storedNotes = localStorage.getItem(webPageUrl);
+if(storedNotes!=null){
+  $('#trumbowygNote').trumbowyg('html', storedNotes);
+  $.notify('Loaded notes from local storage', "success");
+}
+
+
 
 document.getElementById('arxiv-pdf').onclick = function() {
 
@@ -81,5 +102,54 @@ document.getElementById('AstroBites').onclick = function() {
    iframe.height = 600;
    var destination = document.getElementById('renderDisplay');
    destination.appendChild(iframe);
+
+};
+
+var noteStatus = true;
+
+document.getElementById('notesToggle').onclick = function() {
+  if(noteStatus){
+    // if note is already opened, close it
+    $('#trumbowygNote').trumbowyg('destroy');
+    noteStatus = false;
+
+    // hide the div element
+    $('.trumbowyg-dark').css("display","none")
+
+    $('#notesToggle').attr('class','btn btn-secondary btn-lg')
+  }
+  else{
+    // if note is closed, open it
+    $('#trumbowygNote').trumbowyg();
+    noteStatus = true;
+    //show the element
+    $('.trumbowyg-dark').css("display","block")
+
+
+    $('#notesToggle').attr('class','btn btn-lg btn-primary')
+
+  }
+};
+
+document.getElementById('saveNotes').onclick = function() {
+  // get current html from notes
+  var allNotes_html = $('#trumbowygNote').trumbowyg('html');
+
+  // add note to local storage
+  localStorage.setItem(webPageUrl, allNotes_html);
+  $.notify('Added notes to local storage', "success");
+};
+
+
+
+document.getElementById('viewAllNotes').onclick = function() {
+  var constHTML = '<div>'
+  var getLSkeys = Object.keys(localStorage);
+  for(i=0;i<getLSkeys.length;i++){
+    constHTML+=getLSkeys[i]+"<br>";
+    constHTML+=localStorage.getItem(getLSkeys[i])
+  }
+  var destination = document.getElementById('renderDisplay');
+  destination.innerHTML+= constHTML+"</div>";
 
 };
