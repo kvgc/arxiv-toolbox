@@ -1,0 +1,33 @@
+{
+	"manifest_version": 2,
+	"name": "arxiv-toolbox",
+	"version": "0.1.0",
+	"description": "https://github.com/kvgc/WebResearcherJS-extension",
+
+	"permissions": [
+		"<all_urls>", "tabs", "storage","contextMenus"
+	],
+
+	"applications": {
+		"gecko": {
+			"id": "arxivtools@arxivtools.io"
+		}
+	},
+	"content_scripts": [
+	  {
+	    "matches": ["*://*.arxiv.org/*"],
+
+			"css":["ext_libs/jquery-ui.min.css",
+			"ext_libs/bootstrap.min.css",
+			"ext_libs/trumbowyg.css"],
+
+	    "js": ["ext_libs/jquery.min.js",
+			"ext_libs/jquery-ui.min.js",
+			"ext_libs/bootstrap.min.js",
+			"ext_libs/trumbowyg.min.js",
+			"src/background.js"
+		]
+	}
+	]
+
+}
