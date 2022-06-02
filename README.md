@@ -7,5 +7,5 @@ In order to install this extension on firefox:
 
 To use extension, open any arxiv page, you should see two buttons (Open pdf, Search astrobites) on the bottom left and a note editor on the bottom right. See screenshot below: 
 
-<img src="arxivtools_demo.png" width=80%>
+<img src="arxivtools_demo.png" width=100%>
 
